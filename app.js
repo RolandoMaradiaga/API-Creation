@@ -28,6 +28,24 @@ app.get("/articles", (req,res)=>{
     })
 })
 
+app.post("/articles", (req,res) => {
+   var title = req.body.title;
+   var content = req.body.content;
+
+    const newArticle = new Article({
+        title: title,
+        content: content
+    })
+    
+    newArticle.save((err) =>{
+        if(!err){
+            res.send("Successfully added new article")
+        } else {
+            res.send(err);
+        }
+    });
+})
+
 app.listen(3000,() =>{
     console.log("Server started at port 3000");
 });
