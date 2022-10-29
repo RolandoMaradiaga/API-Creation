@@ -36,7 +36,7 @@ app.post("/articles", (req,res) => {
         title: title,
         content: content
     })
-    
+
     newArticle.save((err) =>{
         if(!err){
             res.send("Successfully added new article")
@@ -44,6 +44,16 @@ app.post("/articles", (req,res) => {
             res.send(err);
         }
     });
+})
+
+app.delete("/articles", (req,res) => {
+    Article.deleteMany((err)=>{
+        if(!err){
+            res.send("Deleted all articles")
+        } else {
+            res.send(err)
+        }
+    })
 })
 
 app.listen(3000,() =>{
