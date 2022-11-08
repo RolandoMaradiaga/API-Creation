@@ -84,7 +84,22 @@ app.route("/articles/:articleTitle")
                 }
             }
             )
-    });
+    })
+
+    .patch((req,res) =>{
+        Article.updateOne(
+            {title:req.params.articleTitle},
+            {$set: req.body},
+            {overwrite:true},
+            function(err){
+                if(!err){
+                    console.log("succesfully update");
+                } else{
+                    res.send(err)
+                }
+            }
+        )
+    })
 
 app.listen(3000,() =>{
     console.log("Server started at port 3000");
