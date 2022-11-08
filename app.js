@@ -101,6 +101,19 @@ app.route("/articles/:articleTitle")
         )
     })
 
+    .delete((req,res) => {
+        Article.deleteOne(
+            {title:req.params.articleTitle},
+            function(err){
+                if(!err){
+                    console.log("Item deleted")
+                } else{
+                    res.send(err)
+                }
+            }
+            )
+    })
+
 app.listen(3000,() =>{
     console.log("Server started at port 3000");
 });
